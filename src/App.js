@@ -5,17 +5,53 @@ import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 
 //test commit
-function App() {
-  return (
-    <div>
+class App extends React.Component {
+  state = {
+    items: [],
+    id: uuid(),
+    item: "",
+    editItem: false
+  };
+
+  handleChange = e => {
+    console.log("handle change");
+  };
+  handleSubmit = e => {
+    console.log("handle submit");
+  };
+  clearList = () => {
+    console.log("clear list");
+  };
+  handleDelete = id => {
+    console.log(`handle delete ${id}`);
+  };
+  handleEdit = id => {
+    console.log(`handle edit ${id}`);
+  };
+
+  render() {
+    return (
       <div className="container">
         <div className="row">
-          <TodoInput />
-          <TodoList />
+          <div className="col-10 mx-auto col-md-8 mt-5">
+            <h3 className="text-capitalize text-center">todo input</h3>
+            <TodoInput
+              item={this.state.item}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              editItem={this.state.editItem}
+            />
+            <TodoList
+              items={this.state.items}
+              clearList={this.clearList}
+              handleDelete={this.handleDelete}
+              handleEdit={this.handleEdit}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
