@@ -3,11 +3,25 @@ import Item from "./TodoItem";
 
 export default class TodoList extends Component {
   render() {
+    const { items, clearList, handleDelete, handleEdit } = this.props;
     return (
-      <section>
-        <h1>hello from todo list</h1>
-        <Item />
-      </section>
+      <ul className="list-group my-5">
+        {items.map(item => (
+          <Item
+            key={item.id}
+            title={item.title}
+            handleDelete={() => handleDelete(item.id)}
+            handleEdit={() => handleEdit(item.id)}
+          />
+        ))}
+        <button
+          type="button"
+          onClick={clearList}
+          className="btn btn-danger btn-block mt-5 text-uppercase"
+        >
+          clear list
+        </button>
+      </ul>
     );
   }
 }
